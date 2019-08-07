@@ -1,0 +1,184 @@
+<script src="TryPolymer/webcomponents-lite.min.js"></script>
+<link rel="import"  href="TryPolymer/polymer.html">
+<!-- https://polymer-library.polymer-project.org/1.0/docs/devguide/properties -->
+
+
+
+<script>
+    var MyElement2 = Polymer.Class({
+      is: 'my-element2',
+	  properties: {
+		user: String,
+		isHappy: Boolean,
+		count: {
+		  type: Number,
+		  readOnly: true,
+		  notify: true
+		}
+	  },
+	  // See below for lifecycle callbacks
+      created: function() {
+        this.innerHTML = '<br><h1>My element!<h1>';
+      }
+    });
+
+    document.registerElement('my-element2', MyElement2);
+</script>
+
+
+
+<script>
+
+  Polymer({
+
+    is: 'x-custom',
+
+    properties: {
+      userName: String
+    },
+	attached: function() {
+        console.log(this.userName );
+    },
+
+
+  });
+
+</script>
+
+
+
+<dom-module id="my-element3">
+  <script>
+      MyElement = Polymer({
+
+      is: 'my-element3',
+
+      created: function() {
+	    this.innerHTML = '<h1>-------<h1>';
+        console.log(this.localName + '#' + this.id + ' was created');
+      },
+
+      ready: function() {
+        console.log(this.localName + '#' + this.id + ' has local DOM initialized');
+      },
+
+      attached: function() {
+        console.log(this.localName + '#' + this.id + ' was attached');
+      },
+
+      detached: function() {
+        console.log(this.localName + '#' + this.id + ' was detached');
+      },
+
+      attributeChanged: function(name, type) {
+        console.log(this.localName + '#' + this.id + ' attribute ' + name +
+          ' was changed to ' + this.getAttribute(name));
+      }
+
+    });
+  </script>
+</dom-module>
+
+
+
+
+
+
+<dom-module id="proto-element">
+
+  <template>
+    <p>I'm a DOM element. This is my local DOM!</p>
+  </template>
+
+  <script>
+    Polymer({
+      is: "proto-element"
+    });
+  </script>
+
+</dom-module>
+
+
+
+
+
+
+<dom-module id="picture-frame">
+
+  <template>
+    <!-- scoped CSS for this element -->
+    <style>
+      div {
+        display: inline-block;
+        background-color: #ccc;
+        border-radius: 8px;
+        padding: 4px;
+      }
+    </style>
+    <div>
+      <!-- any children are rendered here -->
+      <content></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "picture-frame",
+    });
+  </script>
+
+</dom-module>
+
+
+
+
+
+
+<dom-module id="name-tag">
+
+  <template>
+    <!-- bind to the "owner" property -->
+    This is <b>{{owner}}</b>'s name-tag element.
+  </template>
+
+  <script>
+  Polymer({
+    is: "name-tag",
+    ready: function() {
+      // set this element's owner property
+      this.owner = "Daniel";
+    }
+  });
+  </script>
+
+</dom-module>
+
+
+
+
+
+
+
+<dom-module id="configurable-name-tag">
+
+  <template>
+    <!-- bind to the "owner" property -->
+    This is <b>{{owner}}</b>'s configurable-name-tag element.
+  </template>
+
+  <script>
+    Polymer({
+      is: "configurable-name-tag",
+      properties: {
+        // declare the owner property
+        owner: {
+          type: String,
+          value: "Daniel"
+        }
+      }
+    });
+  </script>
+
+</dom-module>
+
+
